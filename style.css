@@ -1,0 +1,38 @@
+
+#board{
+    /* display: grid;
+    grid-gap: 0px5
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-style: outset;
+    color: black; */
+    display: grid;
+    grid-template-columns: repeat(2, 110px 1fr) 100px;
+    grid-gap: 5px;
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    background-color: #a79efc;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0px 3px 8px #000;
+
+}
+article div figure:hover {
+    box-shadow: 0px 8px 20px #000;
+}
+header{
+    color: rgb(141, 46, 98);
+}
+.card{
+    background-color: aqua;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    margin: 10px;
+}
+body{
+    background-color: rgb(167, 255, 204);
+}
+/* element.style{
+    color: yellow;
+}
+     */
