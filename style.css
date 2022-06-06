@@ -59,3 +59,14 @@ button{
     border: #65b49a86;
     border-radius: 3px;
 }
+
+.win{
+    background-color: rgb(0, 253, 177);
+    FONT-WEIGHT: 800;
+    text-align: center;
+    border-color: #ce69c9,50%;
+        border-radius: 20px;
+    font-size: xxx-large;
+    border-style: double;
+    border-width: 100px;
+}

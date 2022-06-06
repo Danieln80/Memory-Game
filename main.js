@@ -1,8 +1,6 @@
 const cards = ['🥔', '🍒', '🥑', '🌽', '🥕', '🍇', '🍉', '🍌', '🥭', '🍍', '🥔', '🍒', '🥑', '🌽', '🥕', '🍇', '🍉', '🍌', '🥭', '🍍'];
 let click = [];
-let scoreP1 = 0;
-let scoreP2 = 0;
-let players = [{ name: "", score: scoreP1 }, { name: "", score: scoreP2 }];
+let players = [{ name: "", score: 0 }, { name: "", score: 0 }];
 let counterPlayer = 0;
 
 
@@ -15,23 +13,25 @@ function AddinDivElement(v, i, arr) {
     element.innerHTML = "♣️";
     element.addEventListener(`click`, function () {
         if (click[1] != null) { return }
-        this.innerHTML = v
-        if (click[0] && click[0].id == this.id) { return }
+        if (click[0] && click[0].id == this.id || this.innerHTML != "♣️") { return }
         click.push(this)
+        this.innerHTML = v
 
-        console.log(click);
         if (click[1] != null) {
-            counterPlayer++;
             if (click[0].innerHTML == click[1].innerHTML) {
                 if (counterPlayer % 2 == 0) {
-                    players[0].score = scorePlayers(scoreP1);
+                    counterPlayer--;
+                    players[0].score += 1;
+                    document.getElementById('p1').innerHTML = `Name : ${players[0].name} <br/> Score : ${players[0].score}`
+                }else{
+                counterPlayer--;
+                players[1].score += 1;
+                document.getElementById('p2').innerHTML = `Name : ${players[1].name} <br/> Score : ${players[1].score}`
                 }
-                players[1].score = scorePlayers(scoreP2);
-                if (scoreP1 + scoreP2 == 10) {
-                    alert("ok")
+                if (players[0].score + players[1].score == 10) {
                     setTimeout(() => {
-                        if (scoreP1 != scoreP2) {
-                            board.outerHTML = `<div class = "win"> The Winner is : ${scoreP1 > scoreP2 ? players[0].name : players[1].name}</div>`
+                        if (players[0].score != players[1].score) {
+                            board.outerHTML = `<div class = "win"> The Winner is : ${players[0].score > players[1].score ? players[0].name : players[1].name}</div>`
                         }
                         else {
                             board.outerHTML = `<div class = "win">  ${players[0].name} && ${players[1].name}<br/> Draw ! ! !</div>`
@@ -48,6 +48,7 @@ function AddinDivElement(v, i, arr) {
                     click = [];
                 }, 1000)
             }
+            counterPlayer++;
         }
     })
     element.id = i
@@ -61,12 +62,6 @@ createPlayer()
 function shuffle(cards) {
     cards = cards.sort(() => Math.random() - 0.5)
 }
-function scorePlayers(num) {
-    num++;
-    return num;
-}
-
-
 
 function createPlayer() {
     document.getElementById("board").style.display = 'none'
@@ -91,8 +86,8 @@ function createPlayer() {
 
             players[0].name = player1.value;
             players[1].name = player2.value;
-            player1.outerHTML = `<div class = "players">Name : ${players[0].name} <br/> Score : ${players[0].score}</div>`
-            player2.outerHTML = `<div class = "players">Name : ${players[1].name} <br/> Score : ${players[1].score}</div>`
+            player1.outerHTML = `<div id="p1" class = "players">Name : ${players[0].name} <br/> Score : ${players[0].score}</div>`
+            player2.outerHTML = `<div id="p2" class = "players">Name : ${players[1].name} <br/> Score : ${players[1].score}</div>`
         })
     })
     boardPlayer.appendChild(choosNamePlayer);
